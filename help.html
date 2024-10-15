@@ -1,0 +1,54 @@
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+	  <meta name="keywords" content="">
+  	<meta name="Tinôco" content="">
+    <title>ConsuWatts | Suporte</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./img/logoicon.png">
+    <script id="func">
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+          <img src="./img/logo.png" id="logo">
+           <div class="menu">
+             <a href="account.html" id="ac" class="home">Conta </a>
+             <a href="site.html" id="in" class="home">Início </a>
+             <a href="calendar.html" id="ca" class="home">Calendário</a>
+             <a href="help.html" id="aj" class="home">Ajuda </a>
+           </div>
+      </div>
+    </header>
+    <div>
+        <h2 id="qfrequency">Dúvidas frequentes</h2>
+        <button class="accordion">Para que o app serve?</button>
+        <div class="panel">
+          <p>O ConsuWatts tem a função de auxiliar os usuários a monitorar o consumo de energia, mostrando a quantidade consumida e o valor que será pago em tempo real.</p>
+        </div>
+        <button class="accordion">Como o app funciona?</button>
+        <div class="panel">
+          <p>O software coleta os dados gerados pela fornecedora de energia e disponibiliza para o cliente, identificando o uso diario de kWh e ja realizando o cálculo do valor a ser pago</p>
+        </div>
+        <button class="accordion">Qual é o nosso objetivo?</button>
+        <div class="panel">
+          <p>Fazer com que o consumidor tenha mais ciencia dos seus gastos, tendo maior noção do seu consumo diário.</p>
+        </div>
+        <button class="accordion">Outras dúvidas</button>
+        <form class="form" method="POST">
+          <textarea placeholder="Descreva sua dúvida..." id="frm"></textarea>
+        <input type="submit" id="submit" value="Enviar"></input>
+        </form>
+  
+        <script src="./java/help.js"></script>
+    </div>
+    <div class="dire">
+        <footer>
+          <p>&copy; 2024 ConsuWatts. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+  </body>
+</html>
