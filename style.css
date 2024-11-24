@@ -8,6 +8,8 @@ body {
     line-height: 1.6;
     width: 1400px;
     height: 2890px;
+    display: flex;
+    flex-direction: column;
 
 }
 #logo {
@@ -50,12 +52,15 @@ header {
     text-decoration: none;
     color: black;
 }
+body{
+    flex: 1;
+}
 footer {
     margin-top: 100%;
     background-color: #333;
     color: #999;
     text-align: center;
-    padding: 1px;
+    padding: 0px;
     font-size: 55px;
 }
 #MyChart{
@@ -105,12 +110,12 @@ footer {
 .profile-card{
 
     width:100%;
-    max-width: 360px;
+    max-width: 1050px;
     height: auto;
     text-align: center;
     margin: auto;
     margin-bottom:-250px;
-    margin-top: 30px;
+    margin-top: 100px;
     box-shadow: 0px 0px 8px rgba(56, 56, 56, 0.1);
 
 }
@@ -118,7 +123,7 @@ footer {
 .profile-card .profile-header{
 
     background-color: #000;
-    padding: 20px 40px 100px 40px;
+    padding: 150px 40px 100px 40px;
 
 }
 
@@ -131,48 +136,36 @@ footer {
 .profile-card .profile-body .info-profile{
     text-align: left;
     color: #a4a4a4e5;
+
    
 }
 #n-profile {
     color: #b6b6b6e5;
-    font-size: 15;
+    font-size: 45;
     text-align: center;
     margin-top: -10;
 }
 .profile-card .profile-body .user-info{
     text-align: left;
     margin-left: 50px;
-    margin-top: -166px;
+    margin-top: -500px;
 }
-#user-name, #user-email{
-    margin-left: 5px;
-}
-#user-info{
-    text-align: left;
-    margin-left: 16px;
-    margin-top: -1px;
- }
-#user-info2{
-    text-align: left;
-    margin-left: 30px;
-    margin-top: 18px;
-    margin-right: -10px;
- }
+
 #logo-account{
     width: 100%;
     height: auto;
 }
 .profile-card .profile-body .img-perfil{
 
-    margin-top: -85px;
+    margin-top: -170px;
     margin-bottom: 20px;
 
 }
 
 .profile-card .profile-body .img-perfil img{
 
-    width: 120px;
-    height: 120px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%; 
     padding: 3px;
     background-color: #ededed;
@@ -181,31 +174,32 @@ footer {
 /*Help*/ 
 
 #qfrequency{
-    margin: 15;
+    margin: 50;
+    font-size: 80x;
 }
 
 .accordion {
   background-color: #f1f1f1;
   color: #333;
   cursor: pointer;
-  padding: 18px;
+  padding: 40px;
   width: 100%;
   border: none;
   text-align: left;
   outline: none;
-  font-size: 15px;
+  font-size: 52px;
   transition: 0.4s;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  margin-bottom: 5px;
+  border-radius: 50px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
 }
 
     
 .active, .accordion:hover {
   background-color: #ccc;
-  border-radius: 15px;
+  border-radius: 50px;
   border:none;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
   
 }
 .accordion:after {
@@ -220,45 +214,47 @@ footer {
   content: "\2212";
 }
 .panel {
+  font-size: 50px;
   text-align: justify;
-  text-indent: 15px;
-  padding: 0 18px;
-  margin-bottom: 5px;
+  text-indent: 55px;
+  padding: 0 45px;
+  margin-bottom: px;
   display: none;
   background-color: white;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
 }
 
 .form{
   text-align: justify;
-  text-indent: 15px;
-  padding: 0 18px;
-  margin-bottom: 5px;
+  text-indent: 55px;
+  padding: 25 45px;
   display: none;
   background-color: white;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
 }
 #frm {
-    text-indent: 10px;
+    font-size: 50px;
+    text-indent: 35px;
     font-family: Arial, sans-seriff;
-    margin: 10 10 0 -15;
+    margin: 10 10 0 -50;
+    padding-top: 35px;
     width: 100%;
-    height: 200;
+    height: 400;
     resize: none;
     background-color: white;
-    box-shadow: 0 2pz 4px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.03);
 }
 textarea{
-    border-radius: 10px;  
+    border-radius: 20px;  
 }
 #submit{
-    padding: 5 15;
-    font-size: 15;
-    margin: 10px;
-    border: 0px;
-    border-radius: 30px;
+    padding: 15 30;
+    font-size: 52;
+    margin: 40px;
+    border: 1px;
+    border-radius: 50px;
     background-color: #94d2bd;
     transition: background-color 0.3s ease-in-out;
     display: inline-block;
