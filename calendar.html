@@ -21,68 +21,74 @@
                 </div>
             </div>
         </header>
-    <div class="selector">
-        <label for="month">Mês:</label>
-        <select id="month">
-            <option value="1">Janeiro</option>
-            <option value="2">Fevereiro</option>
-            <option value="3">Março</option>
-            <option value="4">Abril</option>
-            <option value="5">Maio</option>
-            <option value="6">Junho</option>
-            <option value="7">Julho</option>
-            <option value="8">Agosto</option>
-            <option value="9">Setembro</option>
-            <option value="10">Outubro</option>
-            <option value="11">Novembro</option>
-            <option value="12">Dezembro</option>
-        </select>
-
-        <label for="year">Ano:</label>
-        <select id="year"></select>
-       <!-- <button id="generate">Gerar Calendário</button>-->
-    </div>
-    <div class="calendar" id="calendar">
-        <div id="daybox"></div>
-    </div>
-    <footer>
+        <div>
+            <h2>Calendário de Consumo de Energia</h2>
+            
+            <div class="selectcal">
+                <label for="year">Ano:</label>
+                <select id="year"></select>
+                <label for="month">Mês:</label>
+                <select id="month">
+                    <option value="1">Janeiro</option>
+                    <option value="2">Fevereiro</option>
+                    <option value="3">Março</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Maio</option>
+                    <option value="6">Junho</option>
+                    <option value="7">Julho</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+                <button id="butcal" onclick="generateCalendar()">Gerar Calendário</button>
+            </div>
+          <div class="boxcal">
+            <div id="calendar" class="calendar"></div>
+          </div>
+            <div class="total-box">
+                <strong>Total de Consumo:</strong><br><span id="total-consumption">0</span> kWh<br>
+                <strong>Custo Total:</strong><br>R$ <span id="total-cost">0.00</span>
+            </div>
+        </div>
+    <footer id="cfooter">
         <p>&copy; 2024 ConsuWatts. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Script para gerar o calendário -->
     <script>
-        // Valor do kWh
-        const kWhPrice = 0.835;
+        const kWhPrice = 0.835; // Preço do kWh
+let currentTooltip = null; // Armazena o tooltip do dia atual
 
-        // Função para preencher o seletor de anos
-        function fillYearSelector() {
-            const yearSelector = document.getElementById('year');
-            const currentYear = new Date().getFullYear();
-            for (let i = currentYear - 10; i <= currentYear + 10; i++) {
-                const option = document.createElement('option');
-                option.value = i;
-                option.textContent = i;
-                yearSelector.appendChild(option);
-            }
-            yearSelector.value = currentYear; // Define o ano atual como padrão
-        }
+// Preenche o seletor de anos
+function fillYearSelector() {
+    const yearSelector = document.getElementById('year');
+    const currentYear = new Date().getFullYear();
+    for (let i = currentYear - 10; i <= currentYear + 10; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = i;
+        yearSelector.appendChild(option);
+    }
+    yearSelector.value = currentYear; // Define o ano atual como padrão
+}
 
-        function calculateTotalCost(totalConsumption) {
-            return totalConsumption * kWhPrice;
-        }
-function generateCalendar(year, month) {
+// Função para gerar o calendário
+function generateCalendar() {
+    const year = document.getElementById('year').value;
+    const month = document.getElementById('month').value;
+
     const calendarElement = document.getElementById('calendar');
     calendarElement.innerHTML = ''; // Limpa o calendário existente
 
     const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-    
+
     // Cria a linha com os dias da semana
     daysOfWeek.forEach(day => {
         const dayOfWeekElement = document.createElement('div');
         dayOfWeekElement.className = 'day-of-week';
         dayOfWeekElement.textContent = day;
         calendarElement.appendChild(dayOfWeekElement);
-        daysOfWeek.className = 'santos';
     });
 
     const daysInMonth = new Date(year, month, 0).getDate();
@@ -92,14 +98,14 @@ function generateCalendar(year, month) {
     // Preencher os dias em branco antes do primeiro dia
     for (let i = 0; i < firstDay; i++) {
         const emptyDay = document.createElement('div');
-        emptyDay.className = 'noneday';
+        emptyDay.className = 'empty';
         calendarElement.appendChild(emptyDay);
     }
 
-    // Preencher o calendário com os dias
+    // Preencher o calendário com os dias e consumo
     for (let day = 1; day <= daysInMonth; day++) {
         const consumption = (Math.random() * 10).toFixed(1); // Consumo aleatório entre 0 e 10 kWh
-        totalConsumption += parseFloat(consumption); // Acumula o consumo total
+        totalConsumption += parseFloat(consumption);
 
         const dayElement = document.createElement('div');
         dayElement.className = 'day';
@@ -111,47 +117,46 @@ function generateCalendar(year, month) {
         tooltip.innerHTML = `${consumption} kWh`;
         dayElement.appendChild(tooltip);
 
-        // Adiciona evento de clique para mostrar o tooltip
+        // Adiciona evento de clique para mostrar ou esconder o tooltip
         dayElement.addEventListener('click', function() {
-            tooltip.style.display = 'block'; // Exibe o tooltip
+            // Se houver um tooltip visível, esconde-o
+            if (currentTooltip) {
+                currentTooltip.style.display = 'none';
+            }
+
+            // Mostra o tooltip do dia atual
+            if (tooltip.style.display === 'none' || tooltip.style.display === '') {
+                tooltip.style.display = 'block';
+                currentTooltip = tooltip; // Armazena o tooltip atual
+            } else {
+                tooltip.style.display = 'none';
+                currentTooltip = null; // Se o tooltip for fechado, limpa a variável
+            }
         });
 
-        // Adiciona evento de clique fora para esconder o tooltip
-        dayElement.addEventListener('mouseleave', function() {
-            tooltip.style.display = 'none'; // Esconde o tooltip ao sair
-        });
+        // Inicialmente o tooltip está oculto
+        tooltip.style.display = 'none';
 
         calendarElement.appendChild(dayElement);
     }
 
     // Exibir total de consumo e custo no mês
     const totalCost = calculateTotalCost(totalConsumption);
-    const totalConsumptionElement = document.createElement('div');
-    totalConsumptionElement.className = 'total';
-    totalConsumptionElement.innerHTML = `<strong>Total de Consumo:</strong><br>${totalConsumption.toFixed(1)} kWh<br><strong>Custo Total:</strong><br>R$ ${totalCost.toFixed(2)}`;
-    calendarElement.appendChild(totalConsumptionElement);
+    document.getElementById('total-consumption').textContent = totalConsumption.toFixed(1);
+    document.getElementById('total-cost').textContent = totalCost.toFixed(2);
 }
 
+// Calcula o custo total baseado no consumo total
+function calculateTotalCost(totalConsumption) {
+    return totalConsumption * kWhPrice;
+}
 
-        // Preenche o seletor de anos ao carregar a página
-        fillYearSelector();
+// Preenche o seletor de anos ao carregar a página
+fillYearSelector();
 
-        
-      
+// Gerar o calendário inicial para o mês atual
+generateCalendar();
 
-
-        // Gerar o calendário inicial para o mês atual
-        const currentMonth = new Date().getMonth() + 1; // +1 porque os meses começam em 0
-        const currentYear = new Date().getFullYear();
-        generateCalendar(currentYear, currentMonth);
     </script>
-    <!--
-    // Evento de clique para gerar o calendário
-        document.getElementById('generate').addEventListener('click', function() {
-            const month = parseInt(document.getElementById('month').value);
-            const year = parseInt(document.getElementById('year').value);
-            generateCalendar(year, month);
-        }); 
-    -->
 </body>
 </html>

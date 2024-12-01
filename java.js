@@ -42,11 +42,27 @@ new Chart(ctx, {
       legend: {
         labels: {
           font: {
-
             size: 90 // Tamanho da fonte da legenda
-          
           }
-          
+        }
+      },
+      tooltip: {
+        enabled: true,  // Habilita as tooltips
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',  // Cor de fundo da tooltip
+        titleFont: {
+          size: 45,  // Tamanho da fonte do título da tooltip
+        },
+        bodyFont: {
+          size: 45,  // Tamanho da fonte do corpo da tooltip
+        },
+        padding: 15,  // Preenchimento interno da tooltip
+        cornerRadius: 10,  // Arredondamento dos cantos da tooltip
+        displayColors: false,  // Desabilita a exibição das cores ao lado da tooltip
+        callbacks: {
+          label: function(tooltipItem) {
+            // Personaliza o conteúdo da tooltip para mostrar o consumo em kWh
+            return tooltipItem.label + ': ' + tooltipItem.raw + ' kWh';
+          }
         }
       }
     }
